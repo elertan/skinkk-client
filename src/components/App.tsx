@@ -2,6 +2,7 @@ import * as React from "react";
 import colors from '../colors';
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { AnyAction } from "redux";
 import routes from '../routes';
 import {
@@ -81,11 +82,11 @@ class App extends React.Component<IProps, IState> {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   (state: IAppState) => ({
     globalStore: state.global,
   } as IStoreProps),
   (dispatch: IDispatchFunc<AnyAction>) => ({
     globalStoreActions: GlobalStore.actionCreators(dispatch),
   } as IStoreActions),
-)(App);
+)(App) as any);
