@@ -14,6 +14,7 @@ const styles = {
     display: 'inline',
     marginRight: 15,
     cursor: 'pointer',
+    fontSize: 14,
   } as React.CSSProperties,
   currentNavItem: {
     borderBottom: `1px solid ${colors.leagueSuperLight}`,
@@ -60,7 +61,7 @@ class NavBar extends React.Component<{}, IState> {
 
   private getStyleForNavItem(routeName: string) {
     if (this.state.route === routeName) {
-      return Object.assign(styles.navItem, styles.currentNavItem);
+      return Object.assign({}, styles.navItem, styles.currentNavItem);
     }
     return styles.navItem;
   }

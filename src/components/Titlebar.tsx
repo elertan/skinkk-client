@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import * as React from "react";
+import colors from '../colors';
 
 import NavBar from './Titlebar/NavBar';
 
@@ -29,9 +30,27 @@ const styles = {
     alignItems: 'center',
     padding: 15,
   } as React.CSSProperties,
+  minimizeButton: {
+    marginRight: 15,
+    position: 'relative',
+    top: 3,
+  } as React.CSSProperties,
+  actionButton_Hover: {
+    color: colors.leagueSuperLight,
+  } as React.CSSProperties,
 };
 
-class Titlebar extends React.Component<{}, {}> {
+interface IState {
+  minimizeButtonHovered: boolean;
+  closeButtonHovered: boolean;
+}
+
+class Titlebar extends React.Component<{}, IState> {
+  public state = {
+    minimizeButtonHovered: false,
+    closeButtonHovered: false,
+  };
+
   public render() {
     return (
       <div style={styles.container}>
@@ -48,17 +67,36 @@ class Titlebar extends React.Component<{}, {}> {
         {/* Titlebar Actions */}
         <div style={styles.titlebarActionsContainer}>
             <i
-              className="fas fa-minus minimize-button"
-              style={{ marginRight: 15, position: 'relative', top: 3 }}
+              className="fas fa-minus"
+              style={this.getMinimizeButtonStyle()}
               onClick={() => ipcRenderer.send('Titlebar_minimize')}
+              onMouseEnter={() => this.setState({minimizeButtonHovered: true})}
+              onMouseLeave={() => this.setState({minimizeButtonHovered: false})}
             />
             <i
-              className="fas fa-window-close close-button"
+              className="fas fa-window-close"
+              style={this.getCloseButtonStyle()}
               onClick={() => ipcRenderer.send('Titlebar_close')}
+              onMouseEnter={() => this.setState({closeButtonHovered: true})}
+              onMouseLeave={() => this.setState({closeButtonHovered: false})}
             />
         </div>
       </div>
     );
+  }
+
+  private getMinimizeButtonStyle = () => {
+    if (this.state.minimizeButtonHovered) {
+      return Object.assign({}, styles.minimizeButton, styles.actionButton_Hover);
+    }
+    return styles.minimizeButton;
+  }
+
+  private getCloseButtonStyle = () => {
+    if (this.state.closeButtonHovered) {
+      return styles.actionButton_Hover;
+    }
+    return undefined;
   }
 }
 
