@@ -2,6 +2,11 @@ import User from '../../models/User';
 import ActionNames from '../actionNames/global';
 import IApiFailAction from '../IApiFailAction';
 
+export interface ISetBackgroundImageAction {
+  type: ActionNames.SetBackgroundImage;
+  backgroundImage?: string;
+}
+
 export interface ILoginAction {
   type: ActionNames.Login;
 }
@@ -16,6 +21,8 @@ export interface ILoginFailAction extends IApiFailAction {
 }
 
 type KnownAction =
+  ISetBackgroundImageAction |
+
   ILoginAction |
   ILoginSuccessAction |
   ILoginFailAction;

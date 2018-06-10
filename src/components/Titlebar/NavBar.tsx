@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { AnyAction } from 'redux';
 import colors from '../../colors';
-import { IAppState } from '../../store';
+import { IAppState, GlobalStore } from '../../store';
 import IDispatchFunc from '../../store/IDispatchFunc';
 
 const styles = {
@@ -27,8 +27,17 @@ const styles = {
   } as React.CSSProperties,
 };
 
-interface IRouteProps {
+interface IStoreProps {
+  globalStore: GlobalStore.State;
+}
+
+interface IStoreActionProps {
+  globalStoreActions: GlobalStore.IActionCreators;
   pushRoute: (routeName: string) => void;
+}
+
+interface IProps extends IStoreProps, IStoreActionProps {
+
 }
 
 interface IState {
@@ -41,7 +50,7 @@ const routes = [
   { route: '/settings', title: 'SETTINGS' },
 ];
 
-class NavBar extends React.Component<IRouteProps, IState> {
+class NavBar extends React.Component<IProps, IState> {
   public state = {
     route: '/',
   };
@@ -80,9 +89,10 @@ class NavBar extends React.Component<IRouteProps, IState> {
 
 export default connect(
   (state: IAppState) => ({
-
+    globalStore: state.global,
   }),
   (dispatch: IDispatchFunc<AnyAction>) => ({
+    globalStoreActions: GlobalStore.actionCreators(dispatch),
     pushRoute: (route: string) => dispatch(push(route)),
-  } as IRouteProps),
+  } as IStoreActionProps),
 )(NavBar);

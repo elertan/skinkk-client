@@ -1,7 +1,9 @@
 enum ActionNames {
-  Login = "APP_LOGIN",
-  LoginSuccess = "APP_LOGIN_SUCCESS",
-  LoginFail = "APP_LOGIN_FAIL",
+  SetBackgroundImage = 'GLOBAL_SET_BACKGROUND',
+
+  Login = "GLOBAL_LOGIN",
+  LoginSuccess = "GLOBAL_LOGIN_SUCCESS",
+  LoginFail = "GLOBAL_LOGIN_FAIL",
 }
 
 export default ActionNames;
