@@ -2,6 +2,8 @@
 
 This is the client application for SkinKK.
 
+There also exists a repository named **skinkk-ui**, this repository will be its successor. You can find the this repository using this link [here](https://github.com/elertan/skinkk-ui)
+
 ## Development
 
 To start developing this application, you will need to have `node` installed on your machine.
