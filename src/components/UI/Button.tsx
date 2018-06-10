@@ -2,7 +2,7 @@ import * as React from 'react';
 import colors from '../../colors';
 
 interface IProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 interface IState {
