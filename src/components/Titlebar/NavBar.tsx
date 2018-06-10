@@ -1,5 +1,10 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { AnyAction } from 'redux';
 import colors from '../../colors';
+import { IAppState } from '../../store';
+import IDispatchFunc from '../../store/IDispatchFunc';
 
 const styles = {
   container: {
@@ -22,6 +27,10 @@ const styles = {
   } as React.CSSProperties,
 };
 
+interface IRouteProps {
+  pushRoute: (routeName: string) => void;
+}
+
 interface IState {
   route: string;
 }
@@ -32,12 +41,14 @@ const routes = [
   { route: '/settings', title: 'SETTINGS' },
 ];
 
-class NavBar extends React.Component<{}, IState> {
+class NavBar extends React.Component<IRouteProps, IState> {
   public state = {
     route: '/',
   };
 
   public handleRoute = (routeName: string) => {
+    // tslint:disable-next-line:no-console
+    this.props.pushRoute(routeName);
     this.setState({ route: routeName });
   }
 
@@ -67,4 +78,11 @@ class NavBar extends React.Component<{}, IState> {
   }
 }
 
-export default NavBar;
+export default connect(
+  (state: IAppState) => ({
+
+  }),
+  (dispatch: IDispatchFunc<AnyAction>) => ({
+    pushRoute: (route: string) => dispatch(push(route)),
+  } as IRouteProps),
+)(NavBar);
