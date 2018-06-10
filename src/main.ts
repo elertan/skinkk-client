@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import createIPC from './ipc';
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -16,6 +17,9 @@ function createWindow() {
     title: "SkinKK",
     width: 800,
   });
+
+  // Sets up the Inter Process Communication
+  createIPC(mainWindow);
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
