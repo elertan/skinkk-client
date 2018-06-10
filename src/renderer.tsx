@@ -25,8 +25,8 @@ const syncHistoryWithStore = (store: Store<IAppState, AnyAction>, history: Histo
 
 // tslint:disable-next-line:no-debugger
 const initialState = {} as IAppState;
-const routerHistory = createMemoryHistory();
-const store = configureStore(initialState, routerHistory);
+export const routerHistory = createMemoryHistory();
+export const store = configureStore(initialState, routerHistory);
 syncHistoryWithStore(store, routerHistory);
 
 ReactDOM.render(

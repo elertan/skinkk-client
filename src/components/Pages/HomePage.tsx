@@ -6,8 +6,7 @@ class HomePage extends React.Component<{}, {}> {
   public render() {
     return (
       <div>
-        Welcome home!
-        <Button onClick={() => alert('Hello!')}>Test</Button>
+        Home
       </div>
     );
   }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { AnyAction } from 'redux';
 import colors from '../../colors';
-import { IAppState, GlobalStore } from '../../store';
+import { GlobalStore, IAppState } from '../../store';
 import IDispatchFunc from '../../store/IDispatchFunc';
 
 const styles = {
@@ -36,9 +36,7 @@ interface IStoreActionProps {
   pushRoute: (routeName: string) => void;
 }
 
-interface IProps extends IStoreProps, IStoreActionProps {
-
-}
+interface IProps extends IStoreProps, IStoreActionProps {}
 
 interface IState {
   route: string;
@@ -57,6 +55,7 @@ class NavBar extends React.Component<IProps, IState> {
 
   public handleRoute = (routeName: string) => {
     // tslint:disable-next-line:no-console
+    console.log(this);
     this.props.pushRoute(routeName);
     this.setState({ route: routeName });
   }
@@ -90,7 +89,7 @@ class NavBar extends React.Component<IProps, IState> {
 export default connect(
   (state: IAppState) => ({
     globalStore: state.global,
-  }),
+  } as IStoreProps),
   (dispatch: IDispatchFunc<AnyAction>) => ({
     globalStoreActions: GlobalStore.actionCreators(dispatch),
     pushRoute: (route: string) => dispatch(push(route)),
