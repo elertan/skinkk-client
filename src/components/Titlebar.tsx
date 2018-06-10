@@ -1,6 +1,8 @@
 import { ipcRenderer } from 'electron';
 import * as React from "react";
 
+import NavBar from './Titlebar/NavBar';
+
 const styles = {
   container: {
     display: "flex",
@@ -17,6 +19,9 @@ const styles = {
     marginTop: 15,
     fontSize: 18,
     fontFamily: 'LeagueFont',
+  } as React.CSSProperties,
+  navBarContainer: {
+    marginTop: 16,
   } as React.CSSProperties,
   titlebarActionsContainer: {
     display: 'flex',
@@ -35,8 +40,8 @@ class Titlebar extends React.Component<{}, {}> {
           <p style={styles.logo}>SkinKK</p>
         </div>
         {/* NavBar */}
-        <div>
-          NavBar
+        <div style={styles.navBarContainer}>
+          <NavBar />
         </div>
         {/* Empty Drag Space */}
         <div className="drag-region" style={{flex: 1}} />
