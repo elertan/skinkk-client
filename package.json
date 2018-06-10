@@ -1,0 +1,28 @@
+{
+  "name": "skinkk-client",
+  "version": "0.0.1",
+  "description": "The client application that will serve as the user interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run build && electron ./dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elertan/skinkk-client.git"
+  },
+  "author": "Elertan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elertan/skinkk-client/issues"
+  },
+  "homepage": "https://github.com/elertan/skinkk-client#readme",
+  "devDependencies": {
+    "electron": "^2.0.2",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1"
+  }
+}
