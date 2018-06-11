@@ -1,7 +1,7 @@
 {
   "name": "skinkk-client",
   "version": "0.0.1",
-  "description": "The client application that will serve as the user interface",
+  "description": "SkinKK Client Application",
   "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/elertan/skinkk-client.git"
   },
-  "author": "SkinKK Team",
+  "author": "Elertan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/elertan/skinkk-client/issues"
@@ -25,7 +25,7 @@
     "appId": "com.skinkk.client",
     "icon": "./assets/img/icon.png",
     "productName": "SkinKK",
-    "copyright": "Copyright © year ${author}",
+    "copyright": "Copyright © 2018 SkinKK Team",
     "files": [
       "./**/*",
       "./app/**/*",
