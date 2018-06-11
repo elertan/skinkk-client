@@ -8,10 +8,20 @@ const styles = {
     color: colors.leagueSuperLight,
     fontFamily: 'LeagueFont',
   } as React.CSSProperties,
+  headImageContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '5vh',
+  } as React.CSSProperties,
+  headImage: {
+    width: '15vw',
+    maxWidth: 150,
+  } as React.CSSProperties,
   headlineContainer: {
     textAlign: 'center',
     fontSize: 28,
-    marginTop: '15vh',
+    marginTop: '5vh',
   } as React.CSSProperties,
   searchbarContainer: {
     marginTop: '5vh',
@@ -51,6 +61,12 @@ class HomePage extends React.Component<{}, {}> {
   public render() {
     return (
       <div style={styles.container}>
+        <div style={styles.headImageContainer}>
+          <img
+            style={styles.headImage}
+            src="./assets/img/icon.png"
+          />
+        </div>
         <div style={styles.headlineContainer}>
           <h2>All League Skins for FREE</h2>
         </div>
@@ -64,6 +80,7 @@ class HomePage extends React.Component<{}, {}> {
           <div style={styles.socialMediaContainerInner}>
             {socialMedias.map((s, i) =>
             <i
+              key={i}
               className={s.class}
               style={styles.socialMediaIcon}
             />,
