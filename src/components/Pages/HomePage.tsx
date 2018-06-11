@@ -74,7 +74,7 @@ class HomePage extends React.Component<{}, {}> {
           <DropdownSearchbar />
         </div>
         <div style={styles.extraTextContainer}>
-          A total 1427 skins ready to start using for FREE. Try them out now!
+          A total of 1427 skins ready to be used for FREE. Try them out now!
         </div>
         <div style={styles.socialMediaContainer}>
           <div style={styles.socialMediaContainerInner}>
