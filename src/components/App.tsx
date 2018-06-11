@@ -16,18 +16,29 @@ const styles = {
     width: '100vw',
     height: '100vh',
     color: '#EEE',
-    backgroundImage: 'url(./assets/img/background.png)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
     border: `1px solid ${colors.leagueLight}`,
     borderTop: `3px solid ${colors.leagueLight2}`,
     overflow: 'hidden',
   } as React.CSSProperties,
+  backgroundContainer: {
+    backgroundImage: 'url(./assets/img/background.png)',
+    filter: 'blur(10px)',
+    // We need the transform to remove the halo effect with blur(). (White glowing effect at the sides)
+    transform: 'scale(1.1)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    width: '100vw',
+    height: '100vh',
+  } as React.CSSProperties,
+  contentContainer: {
+    position: 'relative',
+    bottom: '100vh',
+  } as React.CSSProperties,
   routeContainer: {
     width: '100%',
     height: '100%',
-  },
+  } as React.CSSProperties,
 };
 
 interface IStoreProps {
@@ -51,6 +62,11 @@ class App extends React.Component<IProps, IState> {
     loading: false,
   };
 
+  public componentDidMount() {
+    // tslint:disable-next-line:max-line-length
+    this.props.globalStoreActions.setBackgroundImage('linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pyke_0.jpg)');
+  }
+
   public render() {
     if (this.state.loading) {
       return (
@@ -59,26 +75,29 @@ class App extends React.Component<IProps, IState> {
     }
 
     return (
-      <div style={this.getContainerStyle()}>
-        <Titlebar />
-        <div style={styles.routeContainer}>
-          {routes}
+      <div style={styles.container}>
+        <div style={this.getBackgroundContainerStyle()} />
+        <div style={styles.contentContainer}>
+          <Titlebar />
+          <div style={styles.routeContainer}>
+            {routes}
+          </div>
         </div>
       </div>
     );
   }
 
-  private getContainerStyle() {
+  private getBackgroundContainerStyle() {
     // This will optionally set the background for the entire application
     if (this.props.globalStore.backgroundImage) {
       return Object.assign(
         {},
-        styles.container,
+        styles.backgroundContainer,
         { backgroundImage: this.props.globalStore.backgroundImage! } as React.CSSProperties,
       );
     }
 
-    return styles.container;
+    return styles.backgroundContainer;
   }
 }
 
