@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/elertan/skinkk-client.git"
   },
-  "author": "Elertan",
+  "author": "SkinKK Team",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/elertan/skinkk-client/issues"
@@ -23,6 +23,9 @@
   "homepage": "https://github.com/elertan/skinkk-client#readme",
   "build": {
     "appId": "com.skinkk.client",
+    "icon": "./assets/img/icon.png",
+    "productName": "SkinKK",
+    "copyright": "Copyright © year ${author}",
     "files": [
       "./**/*",
       "./app/**/*",
@@ -32,7 +35,8 @@
       "output": "dist"
     },
     "win": {
-      "target": "NSIS"
+      "target": "NSIS",
+      "icon": "./assets/img/icon.png"
     }
   },
   "devDependencies": {

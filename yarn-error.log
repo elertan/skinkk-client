@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\dev\skinkk-client\package.json: Unexpected token } in JSON at position 954
+  SyntaxError: C:\dev\skinkk-client\package.json: Unexpected token } in JSON at position 1076
       at JSON.parse (<anonymous>)
       at C:\Users\Dennis Kievits\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1130:59
       at Generator.next (<anonymous>)
@@ -48,15 +48,19 @@ npm manifest:
     "homepage": "https://github.com/elertan/skinkk-client#readme",
     "build": {
       "appId": "com.skinkk.client",
+      "icon": "./assets/img/icon.png",
       "files": [
+        "./**/*",
         "./app/**/*",
         "./assets/**/*"
       ],
       "directories": {
         "output": "dist"
       },
+      "shortcutName": "SkinKK",
       "win": {
         "target": "NSIS",
+        "icon": "./assets/img/icon.png",
       }
     },
     "devDependencies": {
