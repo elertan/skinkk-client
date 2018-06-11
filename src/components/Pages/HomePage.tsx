@@ -24,7 +24,28 @@ const styles = {
     fontSize: 14,
     marginTop: '5vh',
   } as React.CSSProperties,
+  socialMediaContainer: {
+    marginTop: '10vh',
+    display: 'flex',
+    justifyContent: 'center',
+  } as React.CSSProperties,
+  socialMediaContainerInner: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  } as React.CSSProperties,
+  socialMediaIcon: {
+    padding: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    fontSize: 36,
+  } as React.CSSProperties,
 };
+
+const socialMedias = [
+  { class: 'fab fa-facebook', name: 'Facebook' },
+  { class: 'fab fa-youtube', name: 'YouTube' },
+  { class: 'fab fa-discord', name: 'Discord' },
+];
 
 class HomePage extends React.Component<{}, {}> {
   public render() {
@@ -39,10 +60,15 @@ class HomePage extends React.Component<{}, {}> {
         <div style={styles.extraTextContainer}>
           A total 1427 skins ready to start using for FREE. Try them out now!
         </div>
-        <div>
-          <p>Facebook</p>
-          <p>YouTube</p>
-          <p>Discord</p>
+        <div style={styles.socialMediaContainer}>
+          <div style={styles.socialMediaContainerInner}>
+            {socialMedias.map((s, i) =>
+            <i
+              className={s.class}
+              style={styles.socialMediaIcon}
+            />,
+            )}
+          </div>
         </div>
       </div>
     );
