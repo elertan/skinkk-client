@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Champion from '../../models/Champion';
 import LeagueCDN from '../../api/LeagueCDN';
+import Champion from '../../models/Champion';
 
 interface IProps {
   champion: Champion;
