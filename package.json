@@ -2,13 +2,14 @@
   "name": "skinkk-client",
   "version": "0.0.1",
   "description": "The client application that will serve as the user interface",
-  "main": "index.js",
+  "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "compile": "tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "npm run build && electron ./dist/main.js --remote-debugging-port=9992"
+    "start": "npm run compile && electron ./app/main.js --remote-debugging-port=9992",
+    "dist": "npm run compile && build"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,26 @@
     "url": "https://github.com/elertan/skinkk-client/issues"
   },
   "homepage": "https://github.com/elertan/skinkk-client#readme",
+  "build": {
+    "appId": "com.skinkk.client",
+    "files": [
+      "./**/*",
+      "./app/**/*",
+      "./assets/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "NSIS"
+    }
+  },
   "devDependencies": {
     "@types/react-redux": "^6.0.2",
     "@types/react-router-dom": "^4.2.7",
     "@types/react-router-redux": "^5.0.15",
     "electron": "^2.0.2",
+    "electron-builder": "^20.15.1",
     "electron-hot-loader": "^0.8.0",
     "tslint": "^5.10.0",
     "typescript": "^2.9.1"
