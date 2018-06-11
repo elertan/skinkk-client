@@ -16,6 +16,7 @@ const styles = {
     width: 80,
     height: 100,
     margin: 10,
+    marginBottom: 5,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -31,8 +32,10 @@ const styles = {
   } as React.CSSProperties,
   text: {
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: 14,
     color: '#AAA',
+    marginTop: 10,
+    fontFamily: 'LeagueFont',
   } as React.CSSProperties,
 };
 
