@@ -10,6 +10,7 @@ import {
 } from '../store';
 import IDispatchFunc from "../store/IDispatchFunc";
 import Titlebar from "./Titlebar";
+import Spinner from "./UI/Spinner";
 
 const styles = {
   container: {
@@ -19,6 +20,11 @@ const styles = {
     border: `1px solid ${colors.leagueLight}`,
     borderTop: `3px solid ${colors.leagueLight2}`,
     overflow: 'hidden',
+  } as React.CSSProperties,
+  preBackgroundContainer: {
+    backgroundColor: '#000',
+    width: '100vw',
+    height: '100vh',
   } as React.CSSProperties,
   backgroundContainer: {
     backgroundImage: 'url(./assets/img/background.png)',
@@ -30,10 +36,12 @@ const styles = {
     backgroundPosition: 'center',
     width: '100vw',
     height: '100vh',
+    position: 'relative',
+    bottom: '100vh',
   } as React.CSSProperties,
   contentContainer: {
     position: 'relative',
-    bottom: '100vh',
+    bottom: '200vh',
   } as React.CSSProperties,
   routeContainer: {
     width: '100%',
@@ -76,6 +84,9 @@ class App extends React.Component<IProps, IState> {
 
     return (
       <div style={styles.container}>
+        <div style={styles.preBackgroundContainer}>
+          <Spinner />
+        </div>
         <div style={this.getBackgroundContainerStyle()} />
         <div style={styles.contentContainer}>
           <Titlebar />
