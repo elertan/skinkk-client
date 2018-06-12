@@ -4,4 +4,5 @@ export default {
   leagueLight2: '#533f21',
   lightText: '#d3c189',
   darkText: '#BBB',
+  whiteText: '#EEE',
 };

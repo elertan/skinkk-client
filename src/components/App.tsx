@@ -9,6 +9,7 @@ import {
   GlobalStore, IAppState,
 } from '../store';
 import IDispatchFunc from "../store/IDispatchFunc";
+import ModalManager, { Modal } from "./ModalManager";
 import Titlebar from "./Titlebar";
 import Spinner from "./UI/Spinner";
 
@@ -62,11 +63,17 @@ interface IProps extends IStoreProps, IStoreActions {
 }
 
 interface IState {
+  modals: Modal[];
   loading: boolean;
 }
 
+
 class App extends React.Component<IProps, IState> {
   public state = {
+    modals: [{
+      title: <p>This is a test</p>,
+      body: <p>To see wether a modal looks nice</p>,
+    } as Modal] as Modal[],
     loading: false,
   };
 
@@ -94,6 +101,7 @@ class App extends React.Component<IProps, IState> {
             {routes}
           </div>
         </div>
+        <ModalManager modals={this.state.modals} />
       </div>
     );
   }
