@@ -3,6 +3,8 @@ import * as ModalComponent from 'react-modal';
 import colors from '../colors';
 
 export class Modal {
+  // DO NOT SET THIS MANUALLY
+  public id: string;
   public parentSelector?: () => HTMLElement;
   public title?: JSX.Element | string;
   public body?: JSX.Element | string;
@@ -28,6 +30,8 @@ const styles = {
     border: `1px solid ${colors.leagueSuperLight}`,
     padding: 0,
     color: colors.whiteText,
+    display: 'flex',
+    flexDirection: 'column',
   } as React.CSSProperties,
   titleContainer: {
     padding: 15,
@@ -43,11 +47,11 @@ const styles = {
   bodyContainer: {
     padding: 25,
     paddingTop: 15,
-    paddingBottom: 50,
     fontSize: 13,
+    flex: 1,
   } as React.CSSProperties,
   footerContainer: {
-
+    padding: 10,
   } as React.CSSProperties,
 };
 

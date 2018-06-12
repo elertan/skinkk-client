@@ -23,9 +23,14 @@ class SettingsPage extends React.Component<IProps, {}> {
     return (
       <div>
         This page will show my settings later, but for now is being used for testing purposes.
-        <Button onClick={() => this.props.modalStoreActions.openModal({
+        <Button onClick={() => this.props.modalStoreActions.openModal((close) => ({
           title: 'Test',
-        } as Modal)}>Open a modal</Button>
+          body: 'Here is some text',
+          footer:
+          <div>
+            <Button onClick={close}>Close</Button>
+          </div>,
+        }) as Modal)}>Open a modal</Button>
       </div>
     );
   }
