@@ -10,7 +10,7 @@ function createWindow() {
     autoHideMenuBar: false,
     center: true,
     frame: false,
-    height: 600,
+    height: 665,
     icon: path.join(__dirname, "../assets/img/icon.png"),
     minHeight: 500,
     minWidth: 550,

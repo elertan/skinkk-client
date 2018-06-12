@@ -6,6 +6,7 @@ import { Action } from 'redux';
 import LeagueCDN from '../../../api/LeagueCDN';
 import StyleHelper from '../../../helpers/StyleHelper';
 import Champion from '../../../models/Champion';
+import Skin from '../../../models/Skin';
 import { ChampionsStore, GlobalStore, IAppState } from '../../../store';
 import IDispatchFunc from '../../../store/IDispatchFunc';
 import Button from '../../UI/Button';
@@ -31,6 +32,7 @@ interface IProps extends RouteComponentProps<IRouteParams>, IStoreProps, IStoreA
 
 interface IState {
   champion?: Champion;
+  selectedSkin?: Skin;
 }
 
 const styles = {
@@ -67,12 +69,13 @@ const styles = {
 class DetailPage extends React.Component<IProps, IState> {
   public state = {
     champion: undefined as Champion,
+    selectedSkin: undefined as Skin,
   };
 
   public componentDidMount() {
     const championKey = this.props.match.params.key;
     const champion = this.props.championsStore.getSuccess!.find((c: Champion) => c.key === championKey);
-    this.setState({ champion });
+    this.setState({ champion, selectedSkin: champion.skins[0] });
     // tslint:disable-next-line:max-line-length
     this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl(champion.key)));
   }
@@ -100,6 +103,12 @@ class DetailPage extends React.Component<IProps, IState> {
         <div style={styles.skinSelectorContainer}>
           <SkinSelector
             champion={this.state.champion}
+            selectedSkin={this.state.selectedSkin}
+            onSkinChanged={(s: Skin) => {
+              this.setState({ selectedSkin: s });
+              // tslint:disable-next-line:max-line-length
+              this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl(this.state.champion.key, s.num)));
+            }}
           />
         </div>
       </div>

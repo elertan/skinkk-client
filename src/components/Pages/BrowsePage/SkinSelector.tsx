@@ -2,6 +2,7 @@ import * as React from 'react';
 import LeagueCDN from '../../../api/LeagueCDN';
 import Champion from '../../../models/Champion';
 import Skin from '../../../models/Skin';
+import colors from '../../../colors';
 
 interface IProps {
   champion: Champion;
@@ -25,8 +26,34 @@ const styles = {
     alignItems: 'center',
   } as React.CSSProperties,
   switchContainer: {
-    background: 'red',
     height: '20%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    bottom: 30,
+  } as React.CSSProperties,
+  switchItem: {
+    width: 85,
+    height: 55,
+    marginLeft: 5,
+    marginRight: 5,
+    border: '2px solid #222',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  } as React.CSSProperties,
+  skinText: {
+    textAlign: 'center',
+    fontSize: 21,
+    fontFamily: 'LeagueFont',
+    position: 'relative',
+    bottom: 20,
+  } as React.CSSProperties,
+  switchButton: {
+    fontSize: 36,
+    marginLeft: 10,
+    marginRight: 10,
+    color: colors.leagueSuperLight,
   } as React.CSSProperties,
 };
 
@@ -64,13 +91,38 @@ class SkinSelector extends React.Component<IProps, {}> {
         <div style={styles.currentSkinContainer}>
           {this.getImageDiv(champion.key, skin.num)}
         </div>
+        <p style={styles.skinText}>{skin.name === "default" ? "Default" : skin.name}</p>
         <div style={styles.switchContainer}>
+          <i
+            className="fas fa-angle-left"
+            style={styles.switchButton}
+          />
           {switchSkins.map((s: Skin, i: number) =>
-          <div>{s.name}</div>,
+          <div
+            // tslint:disable-next-line:max-line-length
+            style={this.getSwitchItemStyle(champion.key, s.num, skinIndex)}
+            onClick={() => this.props.onSkinChanged && this.props.onSkinChanged(champion.skins[s.num])}
+          />,
           )}
+          <i
+            className="fas fa-angle-right"
+            style={styles.switchButton}
+          />
         </div>
       </div>
     );
+  }
+
+  private getSwitchItemStyle = (championKey: string, skinIndex: number, currentSkinIndex: number) => {
+    const style = Object.assign({}, styles.switchItem, {
+      backgroundImage: `url(${LeagueCDN.getChampionSplashUrl(championKey, skinIndex)})`,
+    } as React.CSSProperties);
+
+    if (skinIndex === currentSkinIndex) {
+      return Object.assign({}, style, { border: `3px solid ${colors.leagueSuperLight}` });
+    }
+
+    return style;
   }
 
   private getImageDiv = (championKey: string, skinIndex: number) => {
