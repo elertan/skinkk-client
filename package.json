@@ -27,7 +27,8 @@
     "productName": "SkinKK",
     "copyright": "Copyright © 2018 SkinKK Team",
     "files": [
-      "./app/**/*.js",
+      "./**/*",
+      "./app/**/*",
       "./assets/**/*"
     ],
     "directories": {

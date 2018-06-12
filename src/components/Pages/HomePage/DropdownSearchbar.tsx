@@ -11,6 +11,10 @@ const styles = {
     background: '#222',
     maxWidth: 500,
     width: '100%',
+    display: 'flex',
+  } as React.CSSProperties,
+  searchIcon: {
+    marginTop: 2,
   } as React.CSSProperties,
   input: {
     background: 'none',
@@ -18,8 +22,10 @@ const styles = {
     outline: 'none',
     fontSize: 15,
     color: colors.leagueSuperLight,
-    fontWeight: 600,
+    fontWeight: 500,
     width: '100%',
+    flex: 1,
+    marginLeft: 10,
   } as React.CSSProperties,
 };
 
@@ -27,6 +33,10 @@ class DropdownSearchbar extends React.Component<{}, {}> {
   public render() {
     return (
       <div style={styles.container}>
+        <i
+          style={styles.searchIcon}
+          className="fas fa-search"
+        />
         <input
           style={styles.input}
           placeholder="Type to search for a champion or skin..."

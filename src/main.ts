@@ -13,7 +13,7 @@ function createWindow() {
     frame: false,
     height: 600,
     icon: path.join(__dirname, "../assets/img/icon.png"),
-    minHeight: 450,
+    minHeight: 500,
     minWidth: 550,
     title: "SkinKK",
     width: 800,

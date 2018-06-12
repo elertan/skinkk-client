@@ -21,6 +21,7 @@ const styles = {
     marginTop: 15,
     fontSize: 18,
     fontFamily: 'LeagueFont',
+    textShadow: '2px 2px 2px #000',
   } as React.CSSProperties,
   navBarContainer: {
     marginTop: 16,

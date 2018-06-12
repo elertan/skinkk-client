@@ -1,7 +1,12 @@
+import { shell } from 'electron';
 import * as React from 'react';
 import colors from '../../colors';
 
 import DropdownSearchbar from './HomePage/DropdownSearchbar';
+
+interface IState {
+  hoveredSocialMediaIcons: boolean[];
+}
 
 const styles = {
   container: {
@@ -45,20 +50,45 @@ const styles = {
   } as React.CSSProperties,
   socialMediaIcon: {
     padding: 10,
-    marginLeft: 20,
-    marginRight: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginLeft: 5,
+    marginRight: 5,
     fontSize: 36,
+  } as React.CSSProperties,
+  socialMediaIcon_hover: {
+    color: '#CCC',
   } as React.CSSProperties,
 };
 
 const socialMedias = [
-  { class: 'fab fa-facebook', name: 'Facebook' },
-  { class: 'fab fa-youtube', name: 'YouTube' },
-  { class: 'fab fa-discord', name: 'Discord' },
-  { class: 'fab fa-patreon', name: 'Patreon' },
+  {
+    class: 'fab fa-facebook',
+    name: 'Facebook',
+    onClick: () => shell.openExternal('https://www.facebook.com/skinkk.official/'),
+  },
+  {
+    class: 'fab fa-youtube',
+    name: 'YouTube',
+    onClick: () => shell.openExternal('https://www.youtube.com/channel/UC-ZgC3QeCSzPBlPPef9Hzjg'),
+  },
+  {
+    class: 'fab fa-discord',
+    name: 'Discord',
+    onClick: () => shell.openExternal('https://discordapp.com/invite/uVGCzKT'),
+  },
+  {
+    class: 'fab fa-patreon',
+    name: 'Patreon',
+    onClick: () => shell.openExternal('https://www.patreon.com/skinkk'),
+  },
 ];
 
-class HomePage extends React.Component<{}, {}> {
+class HomePage extends React.Component<{}, IState> {
+  public state = {
+    hoveredSocialMediaIcons: socialMedias.map((_) => false),
+  };
+
   public render() {
     return (
       <div style={styles.container}>
@@ -83,13 +113,32 @@ class HomePage extends React.Component<{}, {}> {
             <i
               key={i}
               className={s.class}
-              style={styles.socialMediaIcon}
+              style={this.getSocialMediaIconStyle(i)}
+              onClick={s.onClick}
+              title={s.name}
+              onMouseEnter={() => this.handleOnMouseHoverSocialMediaIcon(i, true)}
+              onMouseLeave={() => this.handleOnMouseHoverSocialMediaIcon(i, false)}
             />,
             )}
           </div>
         </div>
       </div>
     );
+  }
+
+  private getSocialMediaIconStyle = (index: number) => {
+    if (this.state.hoveredSocialMediaIcons[index]) {
+      return Object.assign({}, styles.socialMediaIcon, styles.socialMediaIcon_hover);
+    }
+
+    return styles.socialMediaIcon;
+  }
+
+  private handleOnMouseHoverSocialMediaIcon = (index: number, isOver: boolean) => {
+    // Re-create the entire array to conform to react's immutability.
+    const hoveredStates = [...this.state.hoveredSocialMediaIcons];
+    hoveredStates[index] = isOver;
+    this.setState({hoveredSocialMediaIcons: hoveredStates});
   }
 }
 
