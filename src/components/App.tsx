@@ -17,6 +17,8 @@ import ModalManager, { Modal } from "./ModalManager";
 import Titlebar from "./Titlebar";
 import Spinner from "./UI/Spinner";
 import ohUhModalCreator from "./ModalCreators/uhOhModal";
+import LeagueCDN from "../api/LeagueCDN";
+import StyleHelper from "../helpers/StyleHelper";
 
 const styles = {
   container: {
@@ -101,7 +103,7 @@ class App extends React.Component<IProps, IState> {
     }
 
     // tslint:disable-next-line:max-line-length
-    this.props.globalStoreActions.setBackgroundImage('linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pyke_0.jpg)');
+    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl('Pyke')));
   }
 
   public render() {

@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { push } from 'react-router-redux';
 import { Action } from 'redux';
+import LeagueCDN from '../../../api/LeagueCDN';
+import StyleHelper from '../../../helpers/StyleHelper';
 import Champion from '../../../models/Champion';
 import { ChampionsStore, GlobalStore, IAppState } from '../../../store';
 import IDispatchFunc from '../../../store/IDispatchFunc';
 import Button from '../../UI/Button';
 import Spinner from '../../UI/Spinner';
+import SkinSelector from './SkinSelector';
 
 interface IRouteParams {
   key: string;
@@ -33,7 +36,6 @@ interface IState {
 const styles = {
   container: {
     height: 'calc(100vh - 50px)',
-    display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
   } as React.CSSProperties,
@@ -45,6 +47,7 @@ const styles = {
   backButtonContainer: {
     position: 'relative',
     bottom: 30,
+    zIndex: 999,
   } as React.CSSProperties,
   backButtonIcon: {
     fontSize: 21,
@@ -53,6 +56,11 @@ const styles = {
     textAlign: 'center',
     fontSize: 36,
     fontFamily: 'LeagueFont',
+  } as React.CSSProperties,
+  skinSelectorContainer: {
+    height: '100%',
+    position: 'relative',
+    bottom: 70,
   } as React.CSSProperties,
 };
 
@@ -66,7 +74,7 @@ class DetailPage extends React.Component<IProps, IState> {
     const champion = this.props.championsStore.getSuccess!.find((c: Champion) => c.key === championKey);
     this.setState({ champion });
     // tslint:disable-next-line:max-line-length
-    this.props.globalStoreActions.setBackgroundImage(`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.key}_0.jpg)`);
+    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl(champion.key)));
   }
 
   public render() {
@@ -89,8 +97,11 @@ class DetailPage extends React.Component<IProps, IState> {
             </Button>
           </div>
         </div>
-        <div>SkinViewer</div>
-        <div>SkinSelector</div>
+        <div style={styles.skinSelectorContainer}>
+          <SkinSelector
+            champion={this.state.champion}
+          />
+        </div>
       </div>
     );
   }

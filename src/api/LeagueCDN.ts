@@ -12,4 +12,8 @@ export default class LeagueCDN {
   public static getChampionIconUrl(championKey: string) {
     return `http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${championKey}.png`;
   }
+
+  public static getChampionSplashUrl(championKey: string, skinIndex: number = 0) {
+    return `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championKey}_${skinIndex}.jpg`;
+  }
 }
