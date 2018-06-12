@@ -35,6 +35,9 @@ const styles = {
     position: 'relative',
     top: 3,
   } as React.CSSProperties,
+  maximizeButton: {
+    marginRight: 15,
+  } as React.CSSProperties,
   actionButton_Hover: {
     color: colors.leagueSuperLight,
   } as React.CSSProperties,
@@ -42,12 +45,14 @@ const styles = {
 
 interface IState {
   minimizeButtonHovered: boolean;
+  maximizeButtonHovered: boolean;
   closeButtonHovered: boolean;
 }
 
 class Titlebar extends React.Component<{}, IState> {
   public state = {
     minimizeButtonHovered: false,
+    maximizeButtonHovered: false,
     closeButtonHovered: false,
   };
 
@@ -74,6 +79,13 @@ class Titlebar extends React.Component<{}, IState> {
               onMouseLeave={() => this.setState({minimizeButtonHovered: false})}
             />
             <i
+              className="far fa-window-maximize"
+              style={this.getMaximizeButtonStyle()}
+              onClick={() => ipcRenderer.send('Titlebar_maximize')}
+              onMouseEnter={() => this.setState({maximizeButtonHovered: true})}
+              onMouseLeave={() => this.setState({maximizeButtonHovered: false})}
+            />
+            <i
               className="fas fa-window-close"
               style={this.getCloseButtonStyle()}
               onClick={() => ipcRenderer.send('Titlebar_close')}
@@ -90,6 +102,13 @@ class Titlebar extends React.Component<{}, IState> {
       return Object.assign({}, styles.minimizeButton, styles.actionButton_Hover);
     }
     return styles.minimizeButton;
+  }
+
+  private getMaximizeButtonStyle = () => {
+    if (this.state.maximizeButtonHovered) {
+      return Object.assign({}, styles.maximizeButton, styles.actionButton_Hover);
+    }
+    return styles.maximizeButton;
   }
 
   private getCloseButtonStyle = () => {
