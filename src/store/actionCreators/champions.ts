@@ -17,5 +17,5 @@ export default (dispatch: IDispatchFunc<KnownAction>) => ({
       type: ActionNames.GetSuccess,
       champions,
     } as IGetSuccessAction);
-  }
+  },
 } as IActionCreators);

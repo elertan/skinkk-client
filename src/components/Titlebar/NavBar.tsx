@@ -20,6 +20,7 @@ const styles = {
     marginRight: 15,
     cursor: 'pointer',
     fontSize: 14,
+    textShadow: '2px 2px 2px #000',
   } as React.CSSProperties,
   currentNavItem: {
     borderBottom: `1px solid ${colors.leagueSuperLight}`,

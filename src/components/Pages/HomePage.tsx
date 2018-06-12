@@ -55,6 +55,7 @@ const socialMedias = [
   { class: 'fab fa-facebook', name: 'Facebook' },
   { class: 'fab fa-youtube', name: 'YouTube' },
   { class: 'fab fa-discord', name: 'Discord' },
+  { class: 'fab fa-patreon', name: 'Patreon' },
 ];
 
 class HomePage extends React.Component<{}, {}> {

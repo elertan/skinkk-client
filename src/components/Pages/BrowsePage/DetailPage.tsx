@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { push } from 'react-router-redux';
 import { Action } from 'redux';
 import Champion from '../../../models/Champion';
 import { ChampionsStore, GlobalStore, IAppState } from '../../../store';
 import IDispatchFunc from '../../../store/IDispatchFunc';
-import Spinner from '../../UI/Spinner';
 import Button from '../../UI/Button';
+import Spinner from '../../UI/Spinner';
 
 interface IRouteParams {
   key: string;
@@ -20,6 +21,7 @@ interface IStoreProps {
 interface IStoreActions {
   globalStoreActions: GlobalStore.IActionCreators;
   championsStoreActions: ChampionsStore.IActionCreators;
+  push: (route: string) => void;
 }
 
 interface IProps extends RouteComponentProps<IRouteParams>, IStoreProps, IStoreActions {}
@@ -40,12 +42,17 @@ const styles = {
     paddingLeft: 20,
     paddingRight: 20,
   } as React.CSSProperties,
+  backButtonContainer: {
+    position: 'relative',
+    bottom: 30,
+  } as React.CSSProperties,
+  backButtonIcon: {
+    fontSize: 21,
+  } as React.CSSProperties,
   championName: {
     textAlign: 'center',
     fontSize: 36,
     fontFamily: 'LeagueFont',
-    position: 'relative',
-    bottom: 30,
   } as React.CSSProperties,
 };
 
@@ -70,8 +77,17 @@ class DetailPage extends React.Component<IProps, IState> {
     return (
       <div style={styles.container}>
         <div style={styles.topRowContainer}>
-          <Button>Back</Button>
           <h1 style={styles.championName}>{this.state.champion.name}</h1>
+          <div style={styles.backButtonContainer}>
+            <Button
+              onClick={() => this.props.push('/browse')}
+            >
+              <i
+                style={styles.backButtonIcon}
+                className="fas fa-angle-left"
+              />
+            </Button>
+          </div>
         </div>
         <div>SkinViewer</div>
         <div>SkinSelector</div>
@@ -88,5 +104,6 @@ export default connect(
   (dispatch: IDispatchFunc<Action>) => ({
     globalStoreActions: GlobalStore.actionCreators(dispatch),
     championsStoreActions: ChampionsStore.actionCreators(dispatch),
+    push: (route: string) => dispatch(push(route)),
   } as IStoreActions),
 )(DetailPage);
