@@ -1,16 +1,41 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { Action } from 'redux';
+import { IAppState, ModalStore } from '../../store';
+import IDispatchFunc from '../../store/IDispatchFunc';
+import { Modal } from '../ModalManager';
+import Button from '../UI/Button';
 import Spinner from '../UI/Spinner';
 
+interface IStoreProps {
+  modalStore: ModalStore.State;
+}
 
-class SettingsPage extends React.Component<{}, {}> {
+interface IStoreActionProps {
+  modalStoreActions: ModalStore.IActionCreators;
+}
+
+interface IProps extends IStoreProps, IStoreActionProps {}
+
+class SettingsPage extends React.Component<IProps, {}> {
   public render() {
+    // tslint:disable-next-line:no-console
     return (
       <div>
-        These are my settings!
-        <Spinner />
+        This page will show my settings later, but for now is being used for testing purposes.
+        <Button onClick={() => this.props.modalStoreActions.openModal({
+          title: 'Test',
+        } as Modal)}>Open a modal</Button>
       </div>
     );
   }
 }
 
-export default SettingsPage;
+export default connect(
+  (state: IAppState) => ({
+    modalStore: state.modal,
+  } as IStoreProps),
+  (dispatch: IDispatchFunc<Action>) => ({
+    modalStoreActions: ModalStore.actionCreators(dispatch),
+  } as IStoreActionProps),
+)(SettingsPage);

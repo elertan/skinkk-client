@@ -29,12 +29,10 @@ export const routerHistory = createMemoryHistory();
 export const store = configureStore(initialState, routerHistory);
 syncHistoryWithStore(store, routerHistory);
 
-export const app = <App />;
-
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store ={store}>
     <ConnectedRouter history={routerHistory}>
-      {app}
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root"),
