@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Action } from 'redux';
 import Champion from '../../../models/Champion';
-import { ChampionsStore, IAppState, GlobalStore } from '../../../store';
+import { ChampionsStore, GlobalStore, IAppState } from '../../../store';
 import IDispatchFunc from '../../../store/IDispatchFunc';
 import Spinner from '../../UI/Spinner';
+import Button from '../../UI/Button';
 
 interface IRouteParams {
   key: string;
@@ -27,6 +28,27 @@ interface IState {
   champion?: Champion;
 }
 
+const styles = {
+  container: {
+    height: 'calc(100vh - 50px)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  } as React.CSSProperties,
+  topRowContainer: {
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  } as React.CSSProperties,
+  championName: {
+    textAlign: 'center',
+    fontSize: 36,
+    fontFamily: 'LeagueFont',
+    position: 'relative',
+    bottom: 30,
+  } as React.CSSProperties,
+};
+
 class DetailPage extends React.Component<IProps, IState> {
   public state = {
     champion: undefined as Champion,
@@ -46,8 +68,13 @@ class DetailPage extends React.Component<IProps, IState> {
     }
 
     return (
-      <div>
-        {this.state.champion.name}
+      <div style={styles.container}>
+        <div style={styles.topRowContainer}>
+          <Button>Back</Button>
+          <h1 style={styles.championName}>{this.state.champion.name}</h1>
+        </div>
+        <div>SkinViewer</div>
+        <div>SkinSelector</div>
       </div>
     );
   }
