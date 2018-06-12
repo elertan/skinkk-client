@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { IAppState, ModalStore } from '../../store';
 import IDispatchFunc from '../../store/IDispatchFunc';
+import eulaModalCreator from '../ModalCreators/eulaModal';
 import { Modal } from '../ModalManager';
 import Button from '../UI/Button';
 import Spinner from '../UI/Spinner';
@@ -23,14 +24,7 @@ class SettingsPage extends React.Component<IProps, {}> {
     return (
       <div>
         This page will show my settings later, but for now is being used for testing purposes.
-        <Button onClick={() => this.props.modalStoreActions.openModal((close) => ({
-          title: 'Test',
-          body: 'Here is some text',
-          footer:
-          <div>
-            <Button onClick={close}>Close</Button>
-          </div>,
-        }) as Modal)}>Open a modal</Button>
+        <Button onClick={() => this.props.modalStoreActions.openModal(eulaModalCreator)}>Show EULA Modal</Button>
       </div>
     );
   }

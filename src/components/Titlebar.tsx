@@ -3,6 +3,7 @@ import * as React from "react";
 import colors from '../colors';
 
 import NavBar from './Titlebar/NavBar';
+import { IPCEvents } from '../ipc';
 
 const styles = {
   container: {
@@ -76,21 +77,21 @@ class Titlebar extends React.Component<{}, IState> {
             <i
               className="fas fa-minus"
               style={this.getMinimizeButtonStyle()}
-              onClick={() => ipcRenderer.send('Titlebar_minimize')}
+              onClick={() => ipcRenderer.send(IPCEvents.titlebar_minimize)}
               onMouseEnter={() => this.setState({minimizeButtonHovered: true})}
               onMouseLeave={() => this.setState({minimizeButtonHovered: false})}
             />
             <i
               className="far fa-window-maximize"
               style={this.getMaximizeButtonStyle()}
-              onClick={() => ipcRenderer.send('Titlebar_maximize')}
+              onClick={() => ipcRenderer.send(IPCEvents.titlebar_maximize)}
               onMouseEnter={() => this.setState({maximizeButtonHovered: true})}
               onMouseLeave={() => this.setState({maximizeButtonHovered: false})}
             />
             <i
               className="fas fa-window-close"
               style={this.getCloseButtonStyle()}
-              onClick={() => ipcRenderer.send('Titlebar_close')}
+              onClick={() => ipcRenderer.send(IPCEvents.titlebar_close)}
               onMouseEnter={() => this.setState({closeButtonHovered: true})}
               onMouseLeave={() => this.setState({closeButtonHovered: false})}
             />

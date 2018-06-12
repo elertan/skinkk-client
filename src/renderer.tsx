@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { AnyAction, Store } from "redux";
 import App from "./components/App";
+import LocalStorage from "./LocalStorage";
 import configureStore, { IAppState } from './store';
 
 // if (process.env.NODE_ENV === 'development') {
@@ -22,6 +23,9 @@ const syncHistoryWithStore = (store: Store<IAppState, AnyAction>, history: Histo
     history.replace(routing.location);
   }
 };
+
+// Initialize the localstorage
+LocalStorage.instance.initialize();
 
 // tslint:disable-next-line:no-debugger
 const initialState = {} as IAppState;

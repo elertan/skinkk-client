@@ -1,17 +1,22 @@
 import * as React from "react";
 import colors from '../colors';
 
+import { ipcRenderer } from "electron";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { AnyAction } from "redux";
+import { IPCEvents } from "../ipc";
+import LocalStorage from "../LocalStorage";
 import routes from '../routes';
 import {
   GlobalStore, IAppState, ModalStore,
 } from '../store';
 import IDispatchFunc from "../store/IDispatchFunc";
+import welcomeModalCreator from "./ModalCreators/welcomeModal";
 import ModalManager, { Modal } from "./ModalManager";
 import Titlebar from "./Titlebar";
 import Spinner from "./UI/Spinner";
+import ohUhModalCreator from "./ModalCreators/uhOhModal";
 
 const styles = {
   container: {
@@ -74,6 +79,27 @@ class App extends React.Component<IProps, IState> {
   };
 
   public componentDidMount() {
+    ipcRenderer.on(
+      IPCEvents.App_startLocalServerFail,
+      () => this.props.modalStoreActions.openModal(ohUhModalCreator(
+        'The local server cannot be started.\n\
+        \
+        It might be related due to the fact that port 13370 is in use, \
+        or you might have declined the Firewall Prompt, in which case you\'ll \
+        need to manually enable it in your firewall settings.',
+      )),
+    );
+    if (LocalStorage.instance.data!.isFirstLaunch) {
+      // Show dialog to start local server
+      this.props.modalStoreActions.openModal(welcomeModalCreator);
+      LocalStorage.instance.manipulateAndSave((data) => {
+        data.isFirstLaunch = false;
+        return data;
+      });
+    } else {
+      ipcRenderer.send(IPCEvents.App_startLocalServer);
+    }
+
     // tslint:disable-next-line:max-line-length
     this.props.globalStoreActions.setBackgroundImage('linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pyke_0.jpg)');
   }

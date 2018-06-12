@@ -25,7 +25,7 @@ const styles = {
     backgroundColor: 'rgb(1, 10, 20)',
     borderRadius: 0,
     width: '70vw',
-    height: '30vh',
+    maxHeight: '50vh',
     margin: 'auto auto',
     border: `1px solid ${colors.leagueSuperLight}`,
     padding: 0,
@@ -35,7 +35,8 @@ const styles = {
   } as React.CSSProperties,
   titleContainer: {
     padding: 15,
-    fontWeight: 500,
+    fontWeight: 600,
+    fontFamily: 'LeagueFont',
   } as React.CSSProperties,
   separator: {
     height: 1,
@@ -45,13 +46,14 @@ const styles = {
     backgroundColor: '#222',
   } as React.CSSProperties,
   bodyContainer: {
+    overflow: 'auto',
     padding: 25,
     paddingTop: 15,
-    fontSize: 13,
+    fontSize: 14,
     flex: 1,
   } as React.CSSProperties,
   footerContainer: {
-    padding: 10,
+    padding: 15,
   } as React.CSSProperties,
 };
 
@@ -66,6 +68,7 @@ class ModalManager extends React.Component<IProps, {}> {
               overlay: styles.overlay,
               content: styles.content,
             }}
+            ariaHideApp={false}
             parentSelector={m.parentSelector || (() => document.body)}
             isOpen
             key={i}

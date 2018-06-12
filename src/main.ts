@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import createIPC from './ipc';
-import setupLocalServer from './localServer/setup';
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -21,9 +20,6 @@ function createWindow() {
 
   // Sets up the Inter Process Communication
   createIPC(mainWindow);
-
-  // Sets up the local http server for use
-  setupLocalServer();
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
