@@ -13,18 +13,22 @@ import {
 // import persistState from 'redux-localstorage';
 import thunk from 'redux-thunk';
 
+import * as Champions from './Champions';
 import * as Global from './Global';
 
 export {
   Global as GlobalStore,
+  Champions as ChampionsStore,
 };
 
 export interface IAppState {
   global: Global.State;
+  champions: Champions.State;
 }
 
 export const reducers = {
   global: Global.reducer,
+  champions: Champions.reducer,
 };
 
 const allReducers = combineReducers<IAppState>(reducers);
