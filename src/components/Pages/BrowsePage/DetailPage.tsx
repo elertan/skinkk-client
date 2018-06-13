@@ -76,7 +76,7 @@ class DetailPage extends React.Component<IProps, IState> {
   public componentDidMount() {
     const championKey = this.props.match.params.key;
     const champion = this.props.championsStore.getSuccess!.find((c: Champion) => c.key === championKey);
-    const skin = champion.skins[this.props.match.params.num || 0];
+    const skin = champion.skins.find((s) => s.num === (Number(this.props.match.params.num || 0)));
     this.setState({
       champion,
       selectedSkin: skin,
