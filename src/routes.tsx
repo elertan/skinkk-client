@@ -14,6 +14,7 @@ export default (
     <Route exact path="/" component={HomePage} />
     <Route exact path="/browse" component={BrowsePage} />
     <Route exact path="/browse/:key" component={BrowseDetailPage} />
+    <Route exact path="/browse/:key/:num" component={BrowseDetailPage} />
     <Route exact path="/settings" component={SettingsPage} />
   </Switch>
 );

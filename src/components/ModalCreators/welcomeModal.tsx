@@ -30,13 +30,14 @@ const welcomeModalCreator: ModalCreatorFunc = (close) => ({
   body:
   <div>
     <p style={{marginBottom: 10}}>
-      Because this is your first launch, we will ask you to accept the firewall prompt that windows might give you.
+      Because this is your first launch,
+      windows will prompt you for what network access you want to give SkinKK access to.
     </p>
     <p style={{marginBottom: 10}}>
-      If you decline this prompt,
-      SkinKK will be unable to share information locally with League of Legends rendering this app useless.
+      You can decline the prompt,
+      as it isn't required for SkinKK to work. We are only using the loopback address on your computer.
     </p>
-    <p style={{marginBottom: 10}}>Enjoy using SkinKK!</p>
+    <p style={{marginBottom: 10}}>If you have any features or suggestions, please join our Discord Server!</p>
   </div>,
   footer:
   <div style={styles.footerContainer}>
