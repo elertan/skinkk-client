@@ -15,6 +15,7 @@ import SkinSelector from './SkinSelector';
 
 interface IRouteParams {
   key: string;
+  num?: number;
 }
 
 interface IStoreProps {
@@ -75,9 +76,13 @@ class DetailPage extends React.Component<IProps, IState> {
   public componentDidMount() {
     const championKey = this.props.match.params.key;
     const champion = this.props.championsStore.getSuccess!.find((c: Champion) => c.key === championKey);
-    this.setState({ champion, selectedSkin: champion.skins[0] });
+    const skin = champion.skins[this.props.match.params.num || 0];
+    this.setState({
+      champion,
+      selectedSkin: skin,
+    });
     // tslint:disable-next-line:max-line-length
-    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl(champion.key)));
+    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl(champion.key, skin.num)));
   }
 
   public render() {
