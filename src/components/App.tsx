@@ -98,8 +98,6 @@ class App extends React.Component<IProps, IState> {
         data.isFirstLaunch = false;
         return data;
       });
-    } else {
-      ipcRenderer.send(IPCEvents.App_startLocalServer);
     }
 
     // tslint:disable-next-line:max-line-length
