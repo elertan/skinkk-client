@@ -11,6 +11,8 @@ export enum IPCEvents {
 
   App_startLocalServer = 'App_startLocalServer',
   App_startLocalServerFail = 'App_startLocalServerFail',
+
+  Server_leagueClientLockedChampion = 'Server_leagueClientLockedChampion',
 }
 
 export default (browserWindow: Electron.BrowserWindow) => {

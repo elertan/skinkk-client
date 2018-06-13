@@ -49,7 +49,7 @@ const styles = {
     overflow: 'auto',
     padding: 25,
     paddingTop: 15,
-    fontSize: 14,
+    fontSize: 15,
     flex: 1,
   } as React.CSSProperties,
   footerContainer: {
