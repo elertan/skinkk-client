@@ -35,7 +35,7 @@ const styles = {
     height: '100vh',
   } as React.CSSProperties,
   backgroundContainer: {
-    backgroundImage: 'url(./assets/img/background.png)',
+    // backgroundImage: 'url(./assets/img/background.png)',
     filter: 'blur(10px)',
     // We need the transform to remove the halo effect with blur(). (White glowing effect at the sides)
     transform: 'scale(1.1)',
@@ -103,7 +103,7 @@ class App extends React.Component<IProps, IState> {
     }
 
     // tslint:disable-next-line:max-line-length
-    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getChampionSplashUrl('Pyke')));
+    this.props.globalStoreActions.setBackgroundImage(StyleHelper.getAppBackgroundForImageUrl(LeagueCDN.getDefaultBackgroundImage()));
   }
 
   public render() {
