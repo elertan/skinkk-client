@@ -96,6 +96,7 @@ class SkinSelector extends React.Component<IProps, {}> {
           <i
             className="fas fa-angle-left"
             style={styles.switchButton}
+            onClick={this.handleMoveBack}
           />
           {switchSkins.map((s: Skin, i: number) =>
           <div
@@ -107,9 +108,39 @@ class SkinSelector extends React.Component<IProps, {}> {
           <i
             className="fas fa-angle-right"
             style={styles.switchButton}
+            onClick={this.handleMoveForward}
           />
         </div>
       </div>
+    );
+  }
+
+  private handleMoveBack = () => {
+    const skinIndex = this.props.champion.skins.indexOf(this.props.selectedSkin!);
+
+    if (skinIndex - 1 < 0) {
+      // tslint:disable-next-line:no-unused-expression
+      this.props.onSkinChanged && this.props.onSkinChanged(
+        this.props.champion.skins[this.props.champion.skins.length - 1],
+      );
+      return;
+    }
+
+    // tslint:disable-next-line:no-unused-expression
+    this.props.onSkinChanged && this.props.onSkinChanged(this.props.champion.skins[skinIndex - 1]);
+  }
+
+  private handleMoveForward = () => {
+    const skinIndex = this.props.champion.skins.indexOf(this.props.selectedSkin!);
+
+    if (skinIndex + 1 > this.props.champion.skins.length - 1) {
+      // tslint:disable-next-line:no-unused-expression
+      this.props.onSkinChanged && this.props.onSkinChanged(this.props.champion.skins[0]);
+      return;
+    }
+    // tslint:disable-next-line:no-unused-expression
+    this.props.onSkinChanged && this.props.onSkinChanged(
+      this.props.champion.skins[skinIndex + 1],
     );
   }
 

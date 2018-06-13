@@ -1,5 +1,6 @@
 class Data {
   public isFirstLaunch: boolean = true;
+  public backgroundOpacity: number = 0.5;
 }
 
 type ManipulateAndSaveFunc = (data: Data) => Data;
@@ -21,7 +22,7 @@ class LocalStorage {
       this.data = new Data();
       return;
     }
-    this.data = JSON.parse(data);
+    this.data = Object.assign(new Data(), JSON.parse(data));
   }
 
   public save = () => {
