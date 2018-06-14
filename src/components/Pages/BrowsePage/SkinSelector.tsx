@@ -72,19 +72,19 @@ class SkinSelector extends React.Component<IProps, {}> {
       const isPrepending = i > skinBorderAmount;
       if (!isPrepending) {
         if (skinIndex + i > champion.skins.length - 1) {
-          switchSkins = [...switchSkins, champion.skins[i]];
+          switchSkins = [...switchSkins, champion.skins[i - 1]];
           continue;
         }
         switchSkins = [...switchSkins, champion.skins[skinIndex + i]];
         continue;
       }
 
-      const backwardsIndex = skinIndex - i;
+      const backwardsIndex = skinIndex + skinBorderAmount - i;
       if (backwardsIndex < 0) {
-        switchSkins = [champion.skins[champion.skins.length + skinBorderAmount - i], ...switchSkins];
+        switchSkins = [champion.skins[champion.skins.length - Math.abs(backwardsIndex)], ...switchSkins];
         continue;
       }
-      switchSkins = [champion.skins[skinIndex - Math.abs(backwardsIndex)], ...switchSkins];
+      switchSkins = [champion.skins[backwardsIndex], ...switchSkins];
     }
     return (
       <div style={styles.container}>
@@ -101,6 +101,7 @@ class SkinSelector extends React.Component<IProps, {}> {
           {switchSkins.map((s: Skin, i: number) =>
           <div
             // tslint:disable-next-line:max-line-length
+            key={i}
             style={this.getSwitchItemStyle(champion.key, s.num, skinIndex)}
             onClick={() => this.props.onSkinChanged && this.props.onSkinChanged(champion.skins[s.num])}
           />,

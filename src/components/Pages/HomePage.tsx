@@ -93,32 +93,30 @@ const socialMedias = [
     class: "fab fa-facebook",
     name: "Facebook",
     onClick: () =>
-      shell.openExternal("https://www.facebook.com/skinkk.official/")
+      shell.openExternal("https://www.facebook.com/skinkk.official/"),
   },
   {
     class: "fab fa-youtube",
     name: "YouTube",
     onClick: () =>
-      shell.openExternal(
-        "https://www.youtube.com/channel/UC-ZgC3QeCSzPBlPPef9Hzjg"
-      )
+      shell.openExternal("https://www.youtube.com/channel/UC-ZgC3QeCSzPBlPPef9Hzjg"),
   },
   {
     class: "fab fa-discord",
     name: "Discord",
-    onClick: () => shell.openExternal("https://discordapp.com/invite/uVGCzKT")
+    onClick: () => shell.openExternal("https://discordapp.com/invite/uVGCzKT"),
   },
   {
     class: "fab fa-patreon",
     name: "Patreon",
-    onClick: () => shell.openExternal("https://www.patreon.com/skinkk")
+    onClick: () => shell.openExternal("https://www.patreon.com/skinkk"),
   }
 ];
 
 class HomePage extends React.Component<IProps, IState> {
   public state = {
     filterInput: "",
-    hoveredSocialMediaIcons: socialMedias.map((_) => false)
+    hoveredSocialMediaIcons: socialMedias.map((_) => false),
   };
 
   public componentDidMount() {
@@ -128,37 +126,7 @@ class HomePage extends React.Component<IProps, IState> {
   }
 
   public render() {
-    if (!this.props.championsStore.getSuccess) {
-      return (<Spinner />);
-    }
-
-    const dropdownContent = this.props.championsStore
-      .getSuccess!.map((c: Champion) => {
-        const input = this.state.filterInput.toLowerCase();
-        let skins: Skin[];
-        if (c.name.toLowerCase().includes(input)) {
-          skins = c.skins.map((s: Skin) => {
-            if (s.name !== "default") {
-              return s;
-            }
-            return Object.assign({}, s, { name: `Default ${c.name}` } as Skin);
-          });
-        } else {
-          skins = c.skins.filter((s: Skin) =>
-            s.name.toLowerCase().includes(input),
-          );
-        }
-        return {
-          champion: c,
-          skins,
-        };
-      })
-      .filter((data) => data.skins.length !== 0)
-      .map((data) =>
-        data.skins.map((s) => (
-          <SkinDropdownOption champion={data.champion} skin={s} />
-        )),
-      );
+    const dropdownContent = this.props.championsStore.getSuccess ? this.getDropdownContent() : undefined;
     return (
       <div style={styles.container}>
         <div style={styles.headImageContainer}>
@@ -174,10 +142,16 @@ class HomePage extends React.Component<IProps, IState> {
             dropdownVisible={this.state.filterInput !== ""}
             dropdownContent={
             <div style={styles.dropdownContent}>
+              {dropdownContent ?
+              <div>
               {dropdownContent.filter((elements) => elements.length !== 0).length !== 0 ?
               dropdownContent
               :
               <div style={styles.dropdownNoResultsContainer}><p>There are no results for your input.</p></div>
+              }
+              </div>
+              :
+              <Spinner />
               }
             </div>}
           />
@@ -208,12 +182,42 @@ class HomePage extends React.Component<IProps, IState> {
     );
   }
 
+  private getDropdownContent() {
+    return this.props.championsStore
+      .getSuccess!.map((c: Champion) => {
+        const input = this.state.filterInput.toLowerCase();
+        let skins: Skin[];
+        if (c.name.toLowerCase().includes(input)) {
+          skins = c.skins.map((s: Skin) => {
+            if (s.name !== "default") {
+              return s;
+            }
+            return Object.assign({}, s, { name: `Default ${c.name}` } as Skin);
+          });
+        } else {
+          skins = c.skins.filter((s: Skin) =>
+            s.name.toLowerCase().includes(input),
+          );
+        }
+        return {
+          champion: c,
+          skins,
+        };
+      })
+      .filter((data) => data.skins.length !== 0)
+      .map((data) =>
+        data.skins.map((s) => (
+          <SkinDropdownOption champion={data.champion} skin={s} />
+        )),
+      );
+  }
+
   private getSocialMediaIconStyle = (index: number) => {
     if (this.state.hoveredSocialMediaIcons[index]) {
       return Object.assign(
         {},
         styles.socialMediaIcon,
-        styles.socialMediaIcon_hover
+        styles.socialMediaIcon_hover,
       );
     }
 

@@ -35,7 +35,7 @@
       "output": "dist"
     },
     "win": {
-      "target": "NSIS",
+      "target": "MSI",
       "icon": "./assets/img/icon.png"
     }
   },

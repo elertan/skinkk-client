@@ -5,6 +5,8 @@ import { ipcRenderer } from "electron";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { AnyAction } from "redux";
+import LeagueCDN from "../api/LeagueCDN";
+import StyleHelper from "../helpers/StyleHelper";
 import { IPCEvents } from "../ipc";
 import LocalStorage from "../LocalStorage";
 import routes from '../routes';
@@ -12,13 +14,11 @@ import {
   GlobalStore, IAppState, ModalStore,
 } from '../store';
 import IDispatchFunc from "../store/IDispatchFunc";
+import ohUhModalCreator from "./ModalCreators/uhOhModal";
 import welcomeModalCreator from "./ModalCreators/welcomeModal";
 import ModalManager, { Modal } from "./ModalManager";
 import Titlebar from "./Titlebar";
 import Spinner from "./UI/Spinner";
-import ohUhModalCreator from "./ModalCreators/uhOhModal";
-import LeagueCDN from "../api/LeagueCDN";
-import StyleHelper from "../helpers/StyleHelper";
 
 const styles = {
   container: {
