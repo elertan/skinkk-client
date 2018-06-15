@@ -46,13 +46,17 @@ const styles = {
   } as React.CSSProperties,
 };
 
+interface IProps {
+  routeName: string;
+}
+
 interface IState {
   minimizeButtonHovered: boolean;
   maximizeButtonHovered: boolean;
   closeButtonHovered: boolean;
 }
 
-class Titlebar extends React.Component<{}, IState> {
+class Titlebar extends React.Component<IProps, IState> {
   public state = {
     minimizeButtonHovered: false,
     maximizeButtonHovered: false,
@@ -68,7 +72,7 @@ class Titlebar extends React.Component<{}, IState> {
         </div>
         {/* NavBar */}
         <div style={styles.navBarContainer}>
-          <NavBar />
+          <NavBar routeName={this.props.routeName} />
         </div>
         {/* Empty Drag Space */}
         <div className="drag-region" style={{flex: 1}} />

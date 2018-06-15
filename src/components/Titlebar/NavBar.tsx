@@ -37,10 +37,8 @@ interface IStoreActionProps {
   pushRoute: (routeName: string) => void;
 }
 
-interface IProps extends IStoreProps, IStoreActionProps {}
-
-interface IState {
-  route: string;
+interface IProps extends IStoreProps, IStoreActionProps {
+  routeName: string;
 }
 
 const routes = [
@@ -49,14 +47,8 @@ const routes = [
   { route: '/settings', title: 'SETTINGS' },
 ];
 
-class NavBar extends React.Component<IProps, IState> {
-  public state = {
-    route: '/',
-  };
-
+class NavBar extends React.Component<IProps, {}> {
   public handleRoute = (routeName: string) => {
-    // tslint:disable-next-line:no-console
-    console.log(this);
     this.props.pushRoute(routeName);
     this.setState({ route: routeName });
   }
@@ -80,7 +72,14 @@ class NavBar extends React.Component<IProps, IState> {
   }
 
   private getStyleForNavItem(routeName: string) {
-    if (this.state.route === routeName) {
+    let isCurrentRoute = false;
+    if (routeName === '/') {
+      isCurrentRoute = routeName === this.props.routeName;
+    } else {
+      isCurrentRoute = this.props.routeName.includes(routeName);
+    }
+
+    if (isCurrentRoute) {
       return Object.assign({}, styles.navItem, styles.currentNavItem);
     }
     return styles.navItem;

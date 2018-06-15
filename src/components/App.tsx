@@ -3,7 +3,7 @@ import colors from '../colors';
 
 import { ipcRenderer } from "electron";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { AnyAction } from "redux";
 import LeagueCDN from "../api/LeagueCDN";
 import StyleHelper from "../helpers/StyleHelper";
@@ -68,7 +68,7 @@ interface IStoreActions {
 }
 
 // tslint:disable-next-line:no-empty-interface
-interface IProps extends IStoreProps, IStoreActions {
+interface IProps extends RouteComponentProps<{}>, IStoreProps, IStoreActions {
 }
 
 interface IState {
@@ -118,7 +118,7 @@ class App extends React.Component<IProps, IState> {
         </div>
         <div style={this.getBackgroundContainerStyle()} />
         <div style={styles.contentContainer}>
-          <Titlebar />
+          <Titlebar routeName={this.props.location.pathname} />
           <div style={styles.routeContainer}>
             {routes}
           </div>
