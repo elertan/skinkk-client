@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('../../node_modules/react-tippy/dist/tippy.css');
 
 @font-face {
     font-family: "LeagueFont";

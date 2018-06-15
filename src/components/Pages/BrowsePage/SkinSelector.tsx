@@ -3,6 +3,9 @@ import LeagueCDN from '../../../api/LeagueCDN';
 import Champion from '../../../models/Champion';
 import Skin from '../../../models/Skin';
 import colors from '../../../colors';
+import {
+  Tooltip
+} from 'react-tippy';
 
 interface IProps {
   champion: Champion;
@@ -99,12 +102,18 @@ class SkinSelector extends React.Component<IProps, {}> {
             onClick={this.handleMoveBack}
           />
           {switchSkins.map((s: Skin, i: number) =>
+          <Tooltip
+            key={i}
+            position="bottom"
+            trigger={'mouseenter'}
+            title={s.name}
+          >
           <div
             // tslint:disable-next-line:max-line-length
-            key={i}
             style={this.getSwitchItemStyle(champion.key, s.num, skinIndex)}
             onClick={() => this.props.onSkinChanged && this.props.onSkinChanged(champion.skins[s.num])}
-          />,
+          />
+          </Tooltip>
           )}
           <i
             className="fas fa-angle-right"

@@ -206,8 +206,8 @@ class HomePage extends React.Component<IProps, IState> {
       })
       .filter((data) => data.skins.length !== 0)
       .map((data) =>
-        data.skins.map((s) => (
-          <SkinDropdownOption champion={data.champion} skin={s} />
+        data.skins.map((s, i) => (
+          <SkinDropdownOption champion={data.champion} skin={s} key={i} />
         )),
       );
   }
