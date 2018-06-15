@@ -50,7 +50,6 @@ const routes = [
 class NavBar extends React.Component<IProps, {}> {
   public handleRoute = (routeName: string) => {
     this.props.pushRoute(routeName);
-    this.setState({ route: routeName });
   }
 
   public render() {
