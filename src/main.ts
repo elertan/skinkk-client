@@ -11,12 +11,13 @@ function createWindow() {
     autoHideMenuBar: false,
     center: true,
     frame: false,
-    height: 665,
+    height: 720,
     icon: path.join(__dirname, "../assets/img/icon.png"),
     minHeight: 500,
     minWidth: 550,
     title: "SkinKK",
-    width: 800,
+    width: 1000,
+    show: false
   });
 
   // Sets up the Inter Process Communication
@@ -35,6 +36,11 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  // Prevent the white background.
+  mainWindow.on("ready-to-show", () => {
+    mainWindow.show();
   });
 }
 
