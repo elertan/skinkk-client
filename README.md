@@ -16,3 +16,11 @@ To start developing this application, you will need to have `node` installed on 
 ## Building the app
 
 Assuming you can do Development, you can run `npm run dist` to create an installer in the `dist/` folder. You can share this .exe file to let others install the app.
+
+### Here are some screenshots of the app
+
+![https://puu.sh/AGk1H/2ed8e1938c.png](https://puu.sh/AGk1H/2ed8e1938c.png)
+![https://puu.sh/AGk2a/16e5bb2711.png](https://puu.sh/AGk2a/16e5bb2711.png)
+![https://puu.sh/AGk2t/c4b8fb9f72.jpg](https://puu.sh/AGk2t/c4b8fb9f72.jpg)
+![https://puu.sh/AGk2L/c7074d77d1.jpg](https://puu.sh/AGk2L/c7074d77d1.jpg)
+![https://puu.sh/AGk35/27c8f211ee.jpg](https://puu.sh/AGk35/27c8f211ee.jpg)
